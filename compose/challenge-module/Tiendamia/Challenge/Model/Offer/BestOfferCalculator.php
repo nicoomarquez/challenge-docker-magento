@@ -2,6 +2,7 @@
 
 namespace Tiendamia\Challenge\Model\Offer;
 
+use Magento\Framework\Exception\LocalizedException;
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
 use Tiendamia\Challenge\Api\Data\BestOfferOptionsInterface;
 use Tiendamia\Challenge\Api\Data\OfferInterface;
@@ -22,27 +23,32 @@ class BestOfferCalculator
     public function calculate(string $sku)
     {
         $bestOffer = null;
-        $offers = $this->offerRetriever->getOffersBySku($sku);
-        $selectionCriteriaCode = $this->helperData->getOfferSelectionCriteria();
+        try {
+            $offers = $this->offerRetriever->getOffersBySku($sku);
+            $selectionCriteriaCode = $this->helperData->getOfferSelectionCriteria();
 
-        if ($selectionCriteriaCode == BestOfferOptionsInterface::LOWEST_PRICE) {
-            $bestOffer = $this->_getOfferWithLowestPrice($offers);
-        }
-        elseif ($selectionCriteriaCode == BestOfferOptionsInterface::EARLIEST_DELIVERY_DATE) {
-            $bestOffer = $this->_getOfferWithEarliestDeliveryDate($offers);
-        }
-        elseif ($selectionCriteriaCode == BestOfferOptionsInterface::LOWEST_SHIPPING_COST) {
-            $bestOffer = $this->_getOfferWithLowestShippingCost($offers);
-        }
-        elseif ($selectionCriteriaCode == BestOfferOptionsInterface::GUARANTEE_AVAILABILITY) {
-            $bestOffer = $this->_getOfferWithGuaranteeAvailability($offers);
-        }
-        elseif ($selectionCriteriaCode == BestOfferOptionsInterface::REFUND_AVAILABILITY) {
-            $bestOffer = $this->_getOfferWithRefundAvailability($offers);
-        }
+            if ($selectionCriteriaCode == BestOfferOptionsInterface::LOWEST_PRICE) {
+                $bestOffer = $this->_getOfferWithLowestPrice($offers);
+            }
+            elseif ($selectionCriteriaCode == BestOfferOptionsInterface::EARLIEST_DELIVERY_DATE) {
+                $bestOffer = $this->_getOfferWithEarliestDeliveryDate($offers);
+            }
+            elseif ($selectionCriteriaCode == BestOfferOptionsInterface::LOWEST_SHIPPING_COST) {
+                $bestOffer = $this->_getOfferWithLowestShippingCost($offers);
+            }
+            elseif ($selectionCriteriaCode == BestOfferOptionsInterface::GUARANTEE_AVAILABILITY) {
+                $bestOffer = $this->_getOfferWithGuaranteeAvailability($offers);
+            }
+            elseif ($selectionCriteriaCode == BestOfferOptionsInterface::REFUND_AVAILABILITY) {
+                $bestOffer = $this->_getOfferWithRefundAvailability($offers);
+            }
 
-        if (is_null($bestOffer)) {
-            throw new \Exception('Offers not found');
+            if (is_null($bestOffer)) {
+                throw new \Exception('Offers not found');
+            }
+        }
+        catch (\Exception $e){
+            throw new LocalizedException(__('Offers not found'));
         }
 
         return $bestOffer;

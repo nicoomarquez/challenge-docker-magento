@@ -14,9 +14,16 @@
         </offer>
         <provider>
             <api>
-                <host>{provider_host}</host>
+                <host>provider:3000</host>
                 <offers_endpoint>getAllSkuOffers/:sku</offers_endpoint>
             </api>
         </provider>
+        <carriers>
+            <flatrate>
+                <name>Fixed shipping method</name>
+                <price>0</price>
+                <title>Flat Rate</title>
+            </flatrate>
+        </carriers>
     </default>
 </config>

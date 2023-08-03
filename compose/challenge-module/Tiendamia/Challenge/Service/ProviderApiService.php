@@ -26,7 +26,7 @@ class ProviderApiService
         private HelperData      $helperData
     ) {}
 
-    public function getBestOfferBySku($sku): mixed
+    public function getBestOfferBySkuTest($sku): mixed
     {
         $offersBySku = [
             'sku' => $sku,
@@ -90,18 +90,29 @@ class ProviderApiService
     }
 
     /**
-     * Fetch some data from API
+     * Fetch data from API
      */
-    public function getBestOfferBySkuWithAPI($sku): void
+    public function getBestOfferBySku($sku)
     {
-        $response = $this->doRequest($this->helperData->getProviderOffersEndpoint());
+        $response = $this->doRequest(str_replace(':sku', $sku, $this->helperData->getProviderOffersEndpoint()));
         $status = $response->getStatusCode(); // 200 status code
         if ($status != 200) {
-            //$response->getReasonPhrase();
+            $this->logger->error("Error getting offers for product $sku: {$response->getReasonPhrase()}");
+            throw new \Exception($response->getReasonPhrase());
         }
         $responseBody = $response->getBody();
-        $responseContent = $responseBody->getContents(); // here you will have the API response in JSON format
-        // Add your logic using $responseContent
+        $offersBySku = json_decode($responseBody->getContents(), true);
+
+        $this->logger->info(print_r($offersBySku,true));
+
+        //Filter for offers without stock
+        foreach ($offersBySku['offers'] as $key => $offer){
+            if ($offer['stock'] == 0) {
+                unset($offersBySku['offers'][$key]);
+            }
+        }
+
+        return $offersBySku;
     }
 
     /**
