@@ -30,13 +30,16 @@ bin/copyfromcontainer --all
 echo "Moving challenge module to app/code directory"
 mv challenge-module/ src/app/code
 
+echo "Running setup:upgrade"
+bin/clinotty bin/magento setup:upgrade
+
 echo "Enabling Tiendamia_Challenge"
 bin/clinotty bin/magento module:enable Tiendamia_Challenge
 
 echo "Disabling Magento TwoFactorAuth modules"
-bin/clinotty bin/magento bin/magento module:disable Magento_TwoFactorAuth Magento_AdminAdobeImsTwoFactorAuth
+bin/clinotty bin/magento module:disable Magento_TwoFactorAuth Magento_AdminAdobeImsTwoFactorAuth
 
-echo "Running setup:upgrade"
+echo "Applying modules changes"
 bin/clinotty bin/magento setup:upgrade
 
 echo "Forcing deploy of static content to speed up initial requests..."
