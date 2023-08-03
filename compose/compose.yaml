@@ -25,6 +25,8 @@ services:
       - appdata:/var/www/html
       - sockdata:/sock
       - ssldata:/etc/nginx/certs
+    networks:
+      -  es-net
     #extra_hosts: &appextrahosts
       ## Selenium support, replace "magento.test" with URL of your site
       #- "magento.test:172.17.0.1"
@@ -35,6 +37,8 @@ services:
     image: node:18
     ports:
       - "3000:3000"
+    networks:
+      -  es-net
 
   phpfpm:
     image: markoshust/magento-php:8.1-fpm-1
@@ -124,3 +128,7 @@ volumes:
   rabbitmqdata:
   sockdata:
   ssldata:
+
+networks:
+  es-net:
+    driver: bridge
