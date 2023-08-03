@@ -30,6 +30,12 @@ bin/copyfromcontainer --all
 echo "Moving challenge module to app/code directory"
 mv challenge-module/ src/app/code
 
+echo "Enabling Tiendamia_Challenge"
+bin/clinotty bin/magento module:enable Tiendamia_Challenge
+
+echo "Disabling Magento TwoFactorAuth modules"
+bin/clinotty bin/magento bin/magento module:disable Magento_TwoFactorAuth Magento_AdminAdobeImsTwoFactorAuth
+
 echo "Running setup:upgrade"
 bin/clinotty bin/magento setup:upgrade
 
