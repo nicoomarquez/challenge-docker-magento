@@ -1,5 +1,5 @@
 FROM node:18
-
+RUN echo "Running node18 dockerfile!"
 WORKDIR /usr/src/app
 COPY app/package.json ./package.json
 COPY app/package-lock.json ./package-lock.json
