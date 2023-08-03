@@ -91,7 +91,7 @@ COPY conf/msmtprc /etc/msmtprc
 COPY conf/php.ini $PHP_INI_DIR
 COPY conf/php-fpm.conf /usr/local/etc/
 COPY conf/www.conf /usr/local/etc/php-fpm.d/
-
+RUN echo "PHP 8.1 SETUP FINISHED"
 USER app:app
 VOLUME /var/www
 WORKDIR /var/www/html
