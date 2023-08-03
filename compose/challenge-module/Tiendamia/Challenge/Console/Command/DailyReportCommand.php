@@ -13,14 +13,22 @@ use Tiendamia\Challenge\Cron\DailySalesReport;
 
 class DailyReportCommand extends Command
 {
+    /**
+     * @param DailySalesReport $dailySalesReport
+     * @param string|null $name
+     */
     public function __construct(
         private DailySalesReport $dailySalesReport,
-        string $name = null
-    )
-    {
+        string                   $name = null
+    ) {
         parent::__construct($name);
     }
 
+    /**
+     * Configures the command
+     *
+     * @return void
+     */
     protected function configure(): void
     {
         $this->setName('daily:report:command');

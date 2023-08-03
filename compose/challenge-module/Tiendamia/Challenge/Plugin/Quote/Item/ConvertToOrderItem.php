@@ -10,12 +10,15 @@ use Psr\Log\LoggerInterface as PsrLoggerInterface;
 
 class ConvertToOrderItem
 {
-
-    public function __construct(
-        private PsrLoggerInterface $logger
-    )
-    {
-    }
+    /**
+     * Intercepts after convert an item
+     *
+     * @param ToOrderItem $subject
+     * @param OrderItemInterface $orderItem
+     * @param AbstractItem $item
+     * @param $additional
+     * @return OrderItemInterface
+     */
     public function afterConvert(
         ToOrderItem $subject,
         OrderItemInterface $orderItem,
@@ -25,16 +28,4 @@ class ConvertToOrderItem
         $orderItem->setOfferId($item->getOfferId());
         return $orderItem;
     }
-//    public function aroundConvert(
-//        ToOrderItem  $subject,
-//        \Closure     $proceed,
-//        AbstractItem $item,
-//                     $additional = []
-//    ) {
-//        /** @var Item $orderItem */
-//        $orderItem = $proceed($item, $additional);
-//        $orderItem->setOfferId($item->getOfferId());
-//
-//        return $orderItem;
-//    }
 }

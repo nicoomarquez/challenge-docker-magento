@@ -8,18 +8,26 @@ use Magento\Catalog\Model\Product\Visibility;
 use Magento\Catalog\Model\ProductFactory;
 use Magento\Framework\App\State as AppState;
 use Magento\Framework\App\Area;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
 
 class CreateProducts implements DataPatchInterface
 {
+    /**
+     * @param Product $productModel
+     * @param StoreManagerInterface $storeManager
+     * @param ProductFactory $productFactory
+     * @param AppState $state
+     */
     public function __construct(
-        private Product $productModel,
+        private Product               $productModel,
         private StoreManagerInterface $storeManager,
-        private ProductFactory $productFactory,
-        private AppState $state
-    ) {}
+        private ProductFactory        $productFactory,
+        private AppState              $state
+    ) {
+    }
 
     /**
      * Do Upgrade
@@ -31,7 +39,12 @@ class CreateProducts implements DataPatchInterface
         $this->createProduct();
     }
 
-
+    /**
+     * Executes product creation
+     *
+     * @return void
+     * @throws LocalizedException
+     */
     private function createProduct()
     {
         $this->state->setAreaCode(Area::AREA_ADMINHTML);
@@ -46,7 +59,7 @@ class CreateProducts implements DataPatchInterface
             $product->setStoreId(Store::DEFAULT_STORE_ID);
             $product->setWebsiteIds([$this->storeManager->getDefaultStoreView()->getWebsiteId()]);
             $product->setTypeId('simple');
-            $product->addData(array(
+            $product->addData([
                 'name' => $name,//name of product
                 'attribute_set_id' => $attributeSetId,
                 'status' => Status::STATUS_ENABLED,
@@ -57,16 +70,15 @@ class CreateProducts implements DataPatchInterface
                 'description' => $sku,
                 'short_description' => $sku,
                 'price' => 500,
-                'stock_data' => array( //stock management
+                'stock_data' => [ //stock management
                     'manage_stock' => 1,
                     'qty' => 999,
                     'is_in_stock' => 1
-                )
-            ));
+                ]
+            ]);
             $product->save();
         }
     }
-
 
     /**
      * Get aliases

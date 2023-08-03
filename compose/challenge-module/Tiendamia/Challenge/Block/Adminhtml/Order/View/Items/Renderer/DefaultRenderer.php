@@ -21,8 +21,7 @@ class DefaultRenderer extends \Magento\Sales\Block\Adminhtml\Order\View\Items\Re
         $html = '';
         if ($column == 'offer_id') {
             $html = $item->getOfferId();
-        }
-        else {
+        } else {
             $html = parent::getColumnHtml($item, $column, $field);
         }
 

@@ -2,6 +2,8 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Tiendamia\Challenge\Api\BestOfferCalculatorInterface" type="Tiendamia\Challenge\Model\Offer\BestOfferCalculator" />
+    <preference for="Tiendamia\Challenge\Api\Data\OfferInterface" type="Tiendamia\Challenge\Model\Offer\Offer" />
+    <preference for="Tiendamia\Challenge\Api\Data\SellerInterface" type="Tiendamia\Challenge\Model\Seller\Seller" />
     <type name="Magento\Catalog\Api\Data\ProductInterface">
         <plugin name="best_price_offer_selection" type="Tiendamia\Challenge\Plugin\Catalog\Product\Product" sortOrder="1" disabled="false"/>
     </type>

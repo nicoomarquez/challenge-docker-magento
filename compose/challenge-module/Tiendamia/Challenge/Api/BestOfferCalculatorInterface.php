@@ -12,6 +12,7 @@ interface BestOfferCalculatorInterface
 {
     /**
      * Returns best offer available for a given product.
+     *
      * @param string $sku
      * @return OfferInterface
      */

@@ -10,6 +10,10 @@ use Tiendamia\Challenge\Model\Seller\Seller;
 
 class ParseOfferFromArray
 {
+    /**
+     * @param OfferFactory $offerFactory
+     * @param SellerFactory $sellerFactory
+     */
     public function __construct(
         private OfferFactory $offerFactory,
         private SellerFactory $sellerFactory,
@@ -35,7 +39,7 @@ class ParseOfferFromArray
         $seller = $this->sellerFactory->create();
         $seller->addData($sellerData);
 
-        $offer->setSeller('seller', $seller);
+        $offer->setSeller($seller);
 
         return $offer;
     }

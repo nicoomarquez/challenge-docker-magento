@@ -34,6 +34,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Retireve Provider host
+     *
      * @return string
      */
     public function getProviderHost(): string
@@ -45,6 +47,8 @@ class Data extends AbstractHelper
     }
 
     /**
+     * Retrieve provider offers endpoint
+     *
      * @return string
      */
     public function getProviderOffersEndpoint(): string

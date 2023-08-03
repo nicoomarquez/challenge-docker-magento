@@ -6,17 +6,24 @@ use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\Catalog\Model\ProductFactory;
+use Magento\Cms\Model\PageRepository;
 use Magento\Framework\App\State as AppState;
 use Magento\Framework\App\Area;
+use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
 
 class UpdateHomePageContent implements DataPatchInterface
 {
+    /**
+     * @param PageRepository $pageRepository
+     */
     public function __construct(
-        private \Magento\Cms\Model\PageRepository $pageRepository
-    ) {}
+        private PageRepository $pageRepository
+    ) {
+    }
 
     /**
      * Do Upgrade
@@ -28,8 +35,16 @@ class UpdateHomePageContent implements DataPatchInterface
         $this->updateHomePage();
     }
 
-    private function updateHomePage() {
-       $homePage = $this->pageRepository->getById(2);
+    /**
+     * Executes upgrade on cms
+     *
+     * @return void
+     * @throws CouldNotSaveException
+     * @throws NoSuchEntityException
+     */
+    private function updateHomePage()
+    {
+        $homePage = $this->pageRepository->getById(2);
 
         $htmlContent = <<<HTML
 <style>
@@ -62,10 +77,9 @@ class UpdateHomePageContent implements DataPatchInterface
 </div>
 HTML;
 
-       $homePage->setContent($htmlContent);
-       $this->pageRepository->save($homePage);
+        $homePage->setContent($htmlContent);
+        $this->pageRepository->save($homePage);
     }
-
 
     /**
      * Get aliases

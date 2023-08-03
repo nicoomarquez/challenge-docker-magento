@@ -8,7 +8,6 @@ use Tiendamia\Challenge\Model\Seller\Seller;
 
 class Offer extends DataObject implements OfferInterface
 {
-
     /**
      * @inheritDoc
      */

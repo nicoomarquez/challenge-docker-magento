@@ -1,5 +1,4 @@
 <?php
-
 namespace Tiendamia\Challenge\Api\Data;
 
 interface OfferInterface
@@ -26,14 +25,14 @@ interface OfferInterface
     const SELLER = 'seller';
 
     /**
-     * Seller ID
+     * Get Offer ID
      *
      * @return int
      */
     public function getId();
 
     /**
-     * Set Seller ID
+     * Set Offer ID
      *
      * @param int $id
      * @return $this
@@ -41,14 +40,14 @@ interface OfferInterface
     public function setId($id);
 
     /**
-     * Seller price
+     * Get Offer price
      *
      * @return float
      */
     public function getPrice();
 
     /**
-     * Set Seller price
+     * Set Offer price
      *
      * @param float $price
      * @return $this
@@ -56,14 +55,14 @@ interface OfferInterface
     public function setPrice($price);
 
     /**
-     * Seller stock
+     * Get Offer stock
      *
      * @return int
      */
     public function getStock();
 
     /**
-     * Set Seller stock
+     * Set Offer stock
      *
      * @param int $stock
      * @return $this
@@ -71,14 +70,14 @@ interface OfferInterface
     public function setStock($stock);
 
     /**
-     * Seller Shipping Price
+     * Get Offer Shipping Price
      *
      * @return float
      */
     public function getShippingPrice();
 
     /**
-     * Set Seller Shipping Price
+     * Set Offer Shipping Price
      *
      * @param float $shippingPrice
      * @return $this
@@ -86,7 +85,7 @@ interface OfferInterface
     public function setShippingPrice($shippingPrice);
 
     /**
-     * Seller Delivery Date
+     * Get Offer Delivery Date
      *
      * @return string
      */
@@ -101,7 +100,7 @@ interface OfferInterface
     public function setDeliveryDate($deliveryDate);
 
     /**
-     * Offer Can be refunded
+     * Get Offer Can be refunded
      *
      * @return bool
      */
@@ -116,7 +115,7 @@ interface OfferInterface
     public function setCanBeRefunded($canBeRefunded);
 
     /**
-     * Offer Status
+     * Get Offer Status
      *
      * @return string
      */
@@ -131,7 +130,7 @@ interface OfferInterface
     public function setStatus($status);
 
     /**
-     * Offer Guarantee
+     * Get Offer Guarantee
      *
      * @return bool
      */
@@ -146,16 +145,16 @@ interface OfferInterface
     public function setGuarantee($guarantee);
 
     /**
-     * Offer Seller
+     * Get Offer Seller
      *
-     * @return SellerInterface
+     * @return \Tiendamia\Challenge\Api\Data\SellerInterface
      */
     public function getSeller();
 
     /**
      * Set Offer Seller
      *
-     * @param string $seller
+     * @param \Tiendamia\Challenge\Api\Data\SellerInterface $seller
      * @return $this
      */
     public function setSeller($seller);

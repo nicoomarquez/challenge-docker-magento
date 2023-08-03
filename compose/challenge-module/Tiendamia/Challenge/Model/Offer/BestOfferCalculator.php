@@ -8,15 +8,24 @@ use Tiendamia\Challenge\Api\Data\BestOfferOptionsInterface;
 use Tiendamia\Challenge\Api\Data\OfferInterface;
 use Tiendamia\Challenge\Helper\Data as HelperData;
 use Tiendamia\Challenge\Model\Provider\OfferRetriever;
+
 class BestOfferCalculator
 {
+    /**
+     * @param OfferRetriever $offerRetriever
+     * @param HelperData $helperData
+     * @param PsrLoggerInterface $logger
+     */
     public function __construct(
-        private OfferRetriever $offerRetriever,
-        private HelperData $helperData,
+        private OfferRetriever     $offerRetriever,
+        private HelperData         $helperData,
         private PsrLoggerInterface $logger
-    ) {}
+    ) {
+    }
 
     /**
+     * Calculate best offer for a given product sku
+     *
      * @param string $sku
      * @return OfferInterface|null
      */
@@ -29,25 +38,16 @@ class BestOfferCalculator
 
             if ($selectionCriteriaCode == BestOfferOptionsInterface::LOWEST_PRICE) {
                 $bestOffer = $this->_getOfferWithLowestPrice($offers);
-            }
-            elseif ($selectionCriteriaCode == BestOfferOptionsInterface::EARLIEST_DELIVERY_DATE) {
+            } elseif ($selectionCriteriaCode == BestOfferOptionsInterface::EARLIEST_DELIVERY_DATE) {
                 $bestOffer = $this->_getOfferWithEarliestDeliveryDate($offers);
-            }
-            elseif ($selectionCriteriaCode == BestOfferOptionsInterface::LOWEST_SHIPPING_COST) {
+            } elseif ($selectionCriteriaCode == BestOfferOptionsInterface::LOWEST_SHIPPING_COST) {
                 $bestOffer = $this->_getOfferWithLowestShippingCost($offers);
-            }
-            elseif ($selectionCriteriaCode == BestOfferOptionsInterface::GUARANTEE_AVAILABILITY) {
+            } elseif ($selectionCriteriaCode == BestOfferOptionsInterface::GUARANTEE_AVAILABILITY) {
                 $bestOffer = $this->_getOfferWithGuaranteeAvailability($offers);
-            }
-            elseif ($selectionCriteriaCode == BestOfferOptionsInterface::REFUND_AVAILABILITY) {
+            } elseif ($selectionCriteriaCode == BestOfferOptionsInterface::REFUND_AVAILABILITY) {
                 $bestOffer = $this->_getOfferWithRefundAvailability($offers);
             }
-
-            if (is_null($bestOffer)) {
-                throw new \Exception('Offers not found');
-            }
-        }
-        catch (\Exception $e){
+        } catch (\Exception $e) {
             throw new LocalizedException(__('Offers not found'));
         }
 
@@ -55,7 +55,9 @@ class BestOfferCalculator
     }
 
     /**
-     * @param $offers
+     * Calculates best offer using "Lowest price" criteria
+     *
+     * @param mixed $offers
      * @return OfferInterface
      */
     private function _getOfferWithLowestPrice($offers): ?OfferInterface
@@ -71,7 +73,9 @@ class BestOfferCalculator
     }
 
     /**
-     * @param $offers
+     * Calculates best offer using "Earliest delivery date" criteria
+     *
+     * @param mixed $offers
      * @return OfferInterface
      */
     private function _getOfferWithEarliestDeliveryDate($offers): ?OfferInterface
@@ -87,7 +91,9 @@ class BestOfferCalculator
     }
 
     /**
-     * @param $offers
+     * Calculates best offer using "Guarantee Availability" criteria
+     *
+     * @param mixed $offers
      * @return OfferInterface
      */
     private function _getOfferWithGuaranteeAvailability($offers): ?OfferInterface
@@ -103,7 +109,9 @@ class BestOfferCalculator
     }
 
     /**
-     * @param $offers
+     * Calculates best offer using "Lowest shipping cost" criteria
+     *
+     * @param mixed $offers
      * @return OfferInterface
      */
     private function _getOfferWithLowestShippingCost($offers): ?OfferInterface
@@ -119,7 +127,9 @@ class BestOfferCalculator
     }
 
     /**
-     * @param $offers
+     * Calculates best offer using "Refund Availability" criteria
+     *
+     * @param mixed $offers
      * @return OfferInterface
      */
     private function _getOfferWithRefundAvailability($offers): ?OfferInterface
@@ -127,7 +137,8 @@ class BestOfferCalculator
         $bestOffer = null;
         if (count($offers) >= 1) {
             usort($offers, function ($offerA, $offerB) {
-                return $offerA['can_be_refunded'] === $offerB['can_be_refunded'] ? 0 : ($offerA['can_be_refunded'] ? -1 : 1);
+                return $offerA['can_be_refunded'] === $offerB['can_be_refunded'] ?
+                    0 : ($offerA['can_be_refunded'] ? -1 : 1);
             });
             $bestOffer = $offers[0];
         }
