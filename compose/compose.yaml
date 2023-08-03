@@ -37,6 +37,11 @@ services:
     env_file: env/phpfpm.env
     #extra_hosts: *appextrahosts
 
+  provider:
+    image: node:18    
+    ports:
+      - "3000:3000"
+
   db:
     image: mariadb:10.4
     command:

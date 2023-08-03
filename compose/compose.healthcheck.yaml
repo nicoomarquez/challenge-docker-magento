@@ -21,6 +21,10 @@ services:
       #elasticsearch:
       #  condition: service_healthy
 
+  provider:
+    healthcheck:
+      test: 'node -v'
+
   db:
     healthcheck:
       test: 'mysqladmin ping -h localhost -u root -pmagento'
