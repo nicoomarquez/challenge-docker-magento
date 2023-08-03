@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Api\Data\ProductInterface">
+        <plugin name="best_price_offer_selection" type="Tiendamia\Challenge\Plugin\Catalog\Product\Product" sortOrder="1" disabled="false"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
+        <plugin name="quote_item_to_order_item_converter" type="Tiendamia\Challenge\Plugin\Quote\Item\ConvertToOrderItem" sortOrder="1" disabled="false"/>
+    </type>
+</config>

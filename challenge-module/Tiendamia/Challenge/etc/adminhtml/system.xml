@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="tiendamia_settings" translate="label" sortOrder="100">
+            <label>Tiendamia settings</label>
+        </tab>
+        <section id="offer" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Offer</label>
+            <tab>tiendamia_settings</tab>
+            <resource>Tiendamia_Challenge::config_offer</resource>
+            <group id="selection" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Best offer selection</label>
+                <field id="criteria" translate="label comment" type="select" sortOrder="10" showInDefault="1" canRestore="1">
+                    <label>Criteria</label>
+                    <source_model>Tiendamia\Challenge\Model\Config\Source\BestOfferOptions</source_model>
+                    <comment>Select one of these options to determinate the selection criteria of an offer.</comment>
+                </field>
+            </group>
+        </section>
+        <section id="provider" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Provider</label>
+            <tab>tiendamia_settings</tab>
+            <resource>Tiendamia_Challenge::config_provider</resource>
+            <group id="api" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>API Configuration</label>
+                <field id="host" translate="label comment" type="text" sortOrder="10" showInDefault="1" canRestore="1">
+                    <label>Host</label>
+                    <comment>Provider host.</comment>
+                </field>
+                <field id="offers_endpoint" translate="label comment" type="text" sortOrder="10" showInDefault="1" canRestore="1">
+                    <label>Get All Sku Offers Endpoint</label>
+                    <comment>Defines the endpoint to retrieve all sku offers.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
