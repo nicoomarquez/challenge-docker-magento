@@ -33,15 +33,6 @@ mv challenge-module/ src/app/code
 echo "Running setup:upgrade"
 bin/clinotty bin/magento setup:upgrade
 
-echo "Enabling Tiendamia_Challenge"
-bin/clinotty bin/magento module:enable Tiendamia_Challenge
-
-echo "Disabling Magento TwoFactorAuth modules"
-bin/clinotty bin/magento module:disable Magento_TwoFactorAuth Magento_AdminAdobeImsTwoFactorAuth
-
-echo "Applying modules changes"
-bin/clinotty bin/magento setup:upgrade
-
 echo "Forcing deploy of static content to speed up initial requests..."
 bin/clinotty bin/magento setup:static-content:deploy -f
 
@@ -65,6 +56,15 @@ echo "Turning on developer mode..."
 bin/clinotty bin/magento deploy:mode:set developer
 
 cp -r .vscode src/
+
+echo "Enabling Tiendamia_Challenge"
+bin/clinotty bin/magento module:enable Tiendamia_Challenge
+
+echo "Disabling Magento TwoFactorAuth modules"
+bin/clinotty bin/magento module:disable Magento_TwoFactorAuth Magento_AdminAdobeImsTwoFactorAuth
+
+echo "Applying modules changes"
+bin/clinotty bin/magento setup:upgrade
 
 echo "Docker development environment setup complete."
 echo "You may now access your Magento instance at https://${DOMAIN}/"
