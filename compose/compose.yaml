@@ -38,7 +38,7 @@ services:
     #extra_hosts: *appextrahosts
 
   provider:
-    image: node:18    
+    image: node:18
     ports:
       - "3000:3000"
 

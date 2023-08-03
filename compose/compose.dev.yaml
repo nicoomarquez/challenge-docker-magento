@@ -23,6 +23,12 @@ services:
   phpfpm:
     volumes: *appvolumes
 
+  provider:
+    ports:
+      - "3000:3000"
+    depends_on:
+      - app
+
   phpmyadmin:
     image: linuxserver/phpmyadmin
     env_file: env/db.env
