@@ -107,6 +107,8 @@ Due to Docker environment configurations, crons might not work as expected. Addi
 - `bin/magento daily:report:command`
 
 After running this process, you can check the `sales_report` table, which is created to keep a registry of these sales.
+
+
 <img src="docs/sales_report_output.jpeg" alt="sales_report_output">
 
 ## Useful commands
