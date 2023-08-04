@@ -49,7 +49,7 @@ class DailyReportCommand extends Command
         $exitCode = 0;
         try {
             $output->writeln('Daily report - init');
-            $this->dailySalesReport->execute();
+            $this->dailySalesReport->execute(true);
             $output->writeln('Daily report - finished');
         } catch (LocalizedException $e) {
             $output->writeln(sprintf(

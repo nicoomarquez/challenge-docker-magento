@@ -5,8 +5,13 @@
 </div>
 
 ## Table of contents
+- [Usage](#usage)
 - [Prerequisites](#prerequisites)
 - [Setup](#setup)
+- [Testing](#testing)
+- [Useful commands](#useful-commands)
+- [Credits](#credits)
+- [License](#license)
 
 ## Usage
 
@@ -96,6 +101,10 @@ Here is an example of the response of this service
     }
 }
 ```
+
+### Daily sales report command
+Due to Docker environment configurations, crons might not work as expected. Additionally, if there are no orders from the previous day created at the moment of execution, this process will not generate any entries. To address this gap, a command has been created to simulate a cron execution of this process, which will process the orders of the current day. To do this, you can run the following command:
+- `bin/magento daily:report:command`
 
 ## Useful commands
 - `bin/magento`: Run the Magento CLI. Ex: `bin/magento cache:flush`
