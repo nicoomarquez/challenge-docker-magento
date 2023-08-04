@@ -27,26 +27,25 @@ This configuration has been tested on Linux.
 ## Setup
 
 ### Before install
-Make sure that local services are not blocking the required port to setup this project.
-Used ports:
+Make sure that local services are not blocking the required ports to setup this project.
 
-node: 0.0.0.0:3000->3000/tcp, :::3000->3000/tcp
+For example: `sudo systemctl stop mysql apache2 elasticsearch`
 
-nginx: 80/tcp, 0.0.0.0:80->8000/tcp, :::80->8000/tcp, 0.0.0.0:443->8443/tcp, :::443->8443/tcp
+- `node`: 3000
 
-php8.1: 9000/tcp
+- `nginx`: 80
 
-phpmyadmin: 443/tcp, 0.0.0.0:8080->80/tcp, :::8080->80/tcp
+- `phpmyadmin`: 443, 8080
 
-mailcatcher: 1025/tcp, 0.0.0.0:1080->1080/tcp, :::1080->1080/tcp
+- `mailcatcher`: 1080
 
-mariadb: 0.0.0.0:3306->3306/tcp, :::3306->3306/tcp
+- `mariadb`: 3306
 
-rabbitmq: 4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, :::5672->5672/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 0.0.0.0:15672->15672/tcp, :::15672->15672/tcp
+- `rabbitmq`: 15672, 5672
 
-redis: 0.0.0.0:6379->6379/tcp, :::6379->6379/tcp
+- `redis`: 6379
 
-Opensearch: 0.0.0.0:9200->9200/tcp, :::9200->9200/tcp, 9600/tcp, 0.0.0.0:9300->9300/tcp, :::9300->9300/tcp, 9650/tcp
+- `Opensearch`: 9200, 9300
 
 
 ### Automated Setup (New Project)
@@ -68,8 +67,8 @@ After the one-liner above completes running, you should be able to access your s
 It's posible that during the installation, Magento public/private keys need to be entered.
 Feel free to use these credentials to setup the project:
 
-public: 887b9bfec9db5a9b35eb3e381cbc7c92
-private: 1d40a94537c5e2ca9b6379e173b3d981
+- `public`: 887b9bfec9db5a9b35eb3e381cbc7c92
+- `private`: 1d40a94537c5e2ca9b6379e173b3d981
 
 ## Testing
 
