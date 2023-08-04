@@ -106,6 +106,9 @@ Here is an example of the response of this service
 Due to Docker environment configurations, crons might not work as expected. Additionally, if there are no orders from the previous day created at the moment of execution, this process will not generate any entries. To address this gap, a command has been created to simulate a cron execution of this process, which will process the orders of the current day. To do this, you can run the following command:
 - `bin/magento daily:report:command`
 
+After running this process, you can check the `sales_report` table, which is created to keep a registry of these sales.
+<img src="docs/sales_report_output.jpeg" alt="sales_report_output">
+
 ## Useful commands
 - `bin/magento`: Run the Magento CLI. Ex: `bin/magento cache:flush`
 - `bin/bash`: Drop into the bash prompt of your Docker container. The `phpfpm` container should be mainly used to access the filesystem within Docker.
